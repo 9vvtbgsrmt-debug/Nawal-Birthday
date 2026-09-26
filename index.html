@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>For Nawal — Sugar Cube</title>
+<style>
+:root{--ink:#3c3440;--cream:#fffaf5;--rose:#d9a5b3;--gold:#c9a45b;--wine:#6b3d50}
+*{box-sizing:border-box} body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 15%,#fff,#f7e9ed 55%,#ead7df);font-family:Georgia,"Times New Roman",serif;color:var(--ink);display:grid;place-items:center;overflow:hidden}
+.wrap{width:min(92vw,520px);text-align:center}.hint{font:600 12px/1.4 system-ui;letter-spacing:.14em;text-transform:uppercase;color:#8b6875;margin-bottom:14px}
+.card{position:relative;height:min(78vh,650px);min-height:560px;perspective:1600px;cursor:pointer}
+.face{position:absolute;inset:0;border-radius:26px;box-shadow:0 24px 70px #5d34442c;backface-visibility:hidden;transition:transform 1.15s cubic-bezier(.2,.75,.2,1);overflow:hidden;border:1px solid #ffffffaa}
+.front{background:linear-gradient(145deg,#fffdfb,#f4e1e7);display:grid;place-items:center;transform-origin:left center;z-index:3}
+.front:before{content:"";position:absolute;inset:20px;border:1px solid #c9a45b88;border-radius:19px}
+.cover{position:relative}.cover .tiny{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:#9d7684}.cover h1{font-size:44px;font-weight:400;margin:14px 0 8px}.cover p{font-style:italic;font-size:20px;margin:0;color:#765363}.cover-hint{margin:30px 0 14px;font:600 11px system-ui;letter-spacing:.18em;text-transform:uppercase;color:#9d7684}
+.flower{font-size:30px;margin-bottom:12px}
+.inside{background:var(--cream);padding:38px 25px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;z-index:2}
+.open .front{transform:rotateY(-168deg);z-index:1}
+.open .inside{z-index:4}
+.cake-area{position:relative;width:300px;height:300px;display:grid;place-items:end center;flex:0 0 300px}
+.cake{position:absolute;bottom:25px;width:220px;height:130px;background:linear-gradient(#fff8f4,#ead0d6);border-radius:18px 18px 28px 28px;box-shadow:0 13px 25px #6b3d5020;border:1px solid #d6b0bb}
+.cake:before{content:"";position:absolute;left:0;right:0;top:0;height:40px;background:#fffdf9;border-radius:50% 50% 15px 15px;box-shadow:0 3px 0 #dfb9c3}
+.cake:after{content:"•  •  •";position:absolute;top:62px;left:0;right:0;color:#c9a45b;font-size:22px;letter-spacing:18px}
+.candle{position:absolute;bottom:155px;width:48px;height:72px;background:linear-gradient(180deg,#fff8e8,#ead09b);border:2px solid #c9a45b;border-radius:9px;color:#9a6d24;font:700 34px/68px Georgia;text-align:center;z-index:7;box-shadow:0 5px 12px #6b3d5020}.c2{left:calc(50% - 53px)}.c0{left:calc(50% + 5px)}
+.flame{position:absolute;bottom:225px;width:24px;height:34px;z-index:9;background:#e9a64f;border-radius:50% 50% 50% 0;transform:rotate(-45deg);filter:drop-shadow(0 0 10px #f5c66c);animation:flicker .16s infinite alternate}
+.flame:after{content:"";position:absolute;width:9px;height:14px;background:#fff4c9;border-radius:50%;left:7px;top:9px}
+@keyframes flicker{to{transform:rotate(-42deg) scale(1.08) translateY(-2px)}}
+.blown .flame{opacity:0;transform:scale(.2) translateY(20px);transition:.35s}
+.age{position:absolute;bottom:118px;font:700 15px system-ui;color:#765363;letter-spacing:.15em}
+.instruction{font:600 14px system-ui;letter-spacing:.04em;color:#765363;margin-top:-5px}.sub{font:italic 14px Georgia;color:#9a7a84}
+.message{opacity:0;transform:translateY(15px);max-width:390px;transition:.9s ease;pointer-events:none;margin-top:4px}.revealed .message{opacity:1;transform:none}.revealed .cake-area,.revealed .instruction,.revealed .sub{opacity:0;transform:scale(.92);height:0;margin:0;overflow:hidden;transition:.65s}
+.message h2{font-size:31px;font-weight:400;margin:4px 0 14px;color:var(--wine)}.message p{font-size:18px;line-height:1.55;margin:0 0 13px}.signature{font-style:italic;color:#8b6875}.message:after{content:"✦";display:block;margin-top:20px;color:#c9a45b;font-size:20px}
+button{border:1px solid #c9a45b88;background:#fff8f3;color:#6b3d50;border-radius:999px;padding:10px 17px;font:600 13px system-ui;cursor:pointer;margin-top:8px}.hidden{display:none}
+@media(max-height:700px){.card{min-height:500px}.cake-area{transform:scale(.78)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hint">A little birthday surprise for Nawal</div>
+<div class="card" id="card" role="button" aria-label="Open birthday card">
+<section class="face front">
+  <div class="cover"><div class="flower">✦</div><div class="tiny">For my</div><h1>Sugar Cube</h1><p>Happy 20th Birthday</p><div class="cover-hint">Tap to open</div><div class="flower">✦</div></div>
+</section>
+<section class="face inside">
+  <div class="cake-area" id="cakeArea">
+    <div class="age">T W E N T Y</div><div class="candle c2">2</div><div class="candle c0">0</div><div class="flame" id="flame" style="left:calc(50% - 38px)"></div><div class="flame" style="left:calc(50% + 20px)"></div><div class="cake"></div>
+  </div>
+  <div class="instruction" id="instruction">Make a wish & blow 💨</div>
+  <div class="sub" id="sub">Take a breath… and make your wish.</div>
+  <div class="message" id="message">
+    <h2>Happiest birthday, Nawalll 🤍</h2>
+    <p>May God bless you always.</p>
+    <p>I am so grateful to have you as a friend — every meme, every online reference that takes 40+ hours of screen time to know… you <em>know</em> it. 😭</p>
+    <p>I wish you nothing but the best in life. 🫂</p>
+    <div class="signature">Happy 20th, Sugar Cube ✨</div>
+  </div>
+</section>
+</div>
+<button id="blowBtn" class="hidden">Extinguish the candle ✨</button>
+</div>
+<script>
+const card=document.getElementById('card'), area=document.getElementById('cakeArea'), btn=document.getElementById('blowBtn');
+let opened=false, revealed=false;
+card.addEventListener('click',()=>{if(!opened){opened=true;card.classList.add('open');startMic();}else if(!revealed){reveal();}});
+function reveal(){if(revealed)return;revealed=true;area.classList.add('blown');card.classList.add('revealed');btn.classList.add('hidden')}
+btn.addEventListener('click',reveal);
+async function startMic(){
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const source=ctx.createMediaStreamSource(stream), analyser=ctx.createAnalyser();
+    analyser.fftSize=1024; const data=new Uint8Array(analyser.fftSize); source.connect(analyser);
+    let loudFrames=0;
+    function detect(){
+      if(revealed)return;
+      analyser.getByteTimeDomainData(data);
+      let sum=0; for(const x of data){const v=(x-128)/128;sum+=v*v}
+      const rms=Math.sqrt(sum/data.length);
+      if(rms>.16){loudFrames++;}else{loudFrames=Math.max(0,loudFrames-1)}
+      if(loudFrames>5){reveal();stream.getTracks().forEach(t=>t.stop());ctx.close();return}
+      requestAnimationFrame(detect);
+    } detect();
+  }catch(e){btn.classList.remove('hidden');}
+}
+</script>
+</body>
+</html>
